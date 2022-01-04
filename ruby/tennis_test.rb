@@ -1,5 +1,5 @@
-require 'minitest'
-require 'minitest/autorun'
+# require 'minitest'
+# require 'minitest/autorun'
 require_relative "tennis"
 
 TEST_CASES = [
@@ -48,7 +48,7 @@ TEST_CASES = [
    [5, 6, 'Advantage player2', 'player1', 'player2']
 ]
 
-class TestTennis < Minitest::Test
+class TestTennis 
   def play_game(tennisGameClass, p1Points, p2Points, p1Name, p2Name)
     game = tennisGameClass.new(p1Name, p2Name)
     (0..[p1Points, p2Points].max).each do |i|
@@ -63,11 +63,17 @@ class TestTennis < Minitest::Test
   end
 
   def test_Score_Game1
+    total_test_cases = TEST_CASES.length()
+    cases_passed = 0
     TEST_CASES.each do |testcase|
       (p1Points, p2Points, score, p1Name, p2Name) = testcase
       game = play_game(TennisGame1, p1Points, p2Points, p1Name, p2Name)
-      assert_equal(score, game.score())
+      # assert_equal(score, game.score())
+      if score == game.score()
+        cases_passed += 1
+      end
     end
+    puts "Cases passed: " + cases_passed.to_s() + "/" + total_test_cases.to_s() 
   end
 
   def test_Score_Game2
@@ -85,4 +91,22 @@ class TestTennis < Minitest::Test
       assert_equal(score, game.score())
     end
   end
+
+  def test_Score_Game4
+    total_test_cases = TEST_CASES.length()
+    cases_passed = 0
+    TEST_CASES.each do |testcase|
+      (p1Points, p2Points, score, p1Name, p2Name) = testcase
+      game = play_game(TennisGame1, p1Points, p2Points, p1Name, p2Name)
+      if score == game.score()
+        cases_passed += 1
+      end
+    end
+    puts "Cases passed: " + cases_passed.to_s() + "/" + total_test_cases.to_s() 
+  end
 end
+
+
+# Game 1 check
+game4 = TestTennis.new()
+game4.test_Score_Game4()

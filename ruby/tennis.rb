@@ -217,3 +217,53 @@ class TennisGame3
     end
   end
 end
+
+class TennisGame4
+  attr_accessor :p1N, :p2N, :p1P, :p2P
+
+  def initialize(player1Name, player2Name)
+    @p1N = player1Name
+    @p2N = player2Name
+    @p1P = 0
+    @p1P = 0 
+  end
+
+  def won_points(playerName)
+    if playerName == @p1N
+      @plP += 1
+    else 
+      @p2P += 1      
+    end
+  end
+
+  def score()
+    
+    score_array = ["Love", "Fifteen", "Thrity", "Forty"]
+    result = ""
+
+    if (@p1P <= 3 and @p2P <=3)
+      if (@p1P == @p2P and @p1P == 3)
+        result += "Deuce"
+      elsif (@p1P == @p2P)
+        result += score_array[@p1P] + "-All"
+      else
+        result += score_array[@p1P] + "-" + score_array[@p2P]
+      end
+    else
+      if (@p1P == @p2P)
+        result += "Deuce"
+      end
+
+      lead_player = @p1P > @p2P ? @p1N : @p2N
+      diff = (@p1P - @p2P).abs()
+
+      if (diff == 1)
+        result += "Advantage for " + lead_player
+      else
+        result += "Win for " + lead_player
+      end
+    end
+  
+  return result
+  end
+end
